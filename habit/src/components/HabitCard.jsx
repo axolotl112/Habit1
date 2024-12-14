@@ -1,45 +1,56 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 
-export default function HabitCard(props){
+
+export default function HabitCard(props) {
+  const [startDate, setStartDate] = useState(new Date()); // State for Start Date
+  const [endDate, setEndDate] = useState(new Date()); // State for End Date
 
   const navigate = useNavigate();
 
   const handleClick = () => {
-
     const SProps = {
-      id: props.id,
-      name: props.name,
-      progress: props.progress,
+      id: props.card.id,
+      title: props.card.title,
+      name: props.card.name,
+      progress: props.card.progress,
+      startDate, // Pass the start date
+      endDate,   // Pass the end date
     };
-   
-    navigate(`/habit/src/pages/CardPage.jsx/${props.name}` , { state: SProps }); // Target page route
-  }
 
+    navigate(`/habit/src/pages/CardPage.jsx/${props.card.name}` , { state: SProps }); // Target page route
+  };
 
-    return(
-<>
+  const adjustedProgress = props.card.progress > 100 ? 100 : props.card.progress;
 
-      <section onClick={handleClick} className="sec--card">
+  return (
+    <section className="sec--card">
       <div className="card-tab"></div>
-      <div className="card-content">
-   
-        <h2 className="card-title">Headline</h2>
-        <p className="card-description">{props.name}</p>
+      <div onClick={handleClick} className="card-content">
+        <h2 className="card-title">{props.card.title}</h2>
+        <p className="card-description">{props.card.name}</p>
 
-        <div className="progress-bar">
-          <div className="progress" style={{ width: "95%" }}></div>
+        {/* Start Date */}
+        <div>
+     
+        <p>Start Date: {props.card.startDate.toLocaleDateString()}</p>
         </div>
-        <p className="progress-text">%{props.progress}</p>
 
-        <div className="card-footer">
-          <div className="footer-text">Text</div>
-          <div className="footer-text">Text</div>
-          {/* <div className="tag">Tag</div> */}
+        {/* End Date */}
+        <div>
+        <p>End Date: {props.card.endDate.toLocaleDateString()}</p>
         </div>
+
+        <progress className="progress-c" value={props.card.progress} max={100} />
+        <p className="progress-text">%{adjustedProgress}</p>
       </div>
-      </section>
-        </>
-    )
+      <div className="card-footer">
+        <div onClick={() => console.log(props)} className="footer-text">Text</div>
+        <div className="footer-text">Text</div>
+      </div>
+    </section>
+  );
 }

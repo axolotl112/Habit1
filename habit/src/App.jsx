@@ -6,13 +6,17 @@ import Header from './components/header'
 import HabitCard from './components/HabitCard'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import CardPage from './pages/CardPage'
+import TestPage from './pages/test'
 
 
 function App() {
      const [cards, setCards] = useState([
-          { id: 1, name: 'Habit 1', progress: 50 },
-          { id: 2, name: 'Habit 2', progress: 75},
-           {id: 3, name: 'Habit 3', progress: 75} 
+          { id: 1, title:"test" ,  name: 'Habit 1', progress: 100,startDate: new Date(),
+            endDate: new Date(), },
+          { id: 2, title:"test2" , name: 'Habit 2', progress: 40 ,     startDate: new Date(),
+            endDate: new Date(), },
+           {id: 3, title:"test3" , name: 'Habit 3', progress: 10 ,     startDate: new Date(),
+            endDate: new Date(),} 
            
         ]);
 
@@ -36,18 +40,21 @@ function App() {
             {cards.map((card)=>(
         <HabitCard
         key={card.id}
-        id={card.id}
-        name={card.name}
-        progress={card.progress}
+        card={card}
         onUpdate={handleCardUpdate}
+        
       />
             ))}
-             <p>hi1</p>
+           
+          
+
            </div>
          }
        />
+      
        {/* Target Page */}
-       <Route path="/habit/src/pages/CardPage.jsx/:name" element={<CardPage cards={cards} onUpdate={handleCardUpdate} />} />
+       <Route path="/habit/src/pages/CardPage.jsx/:id" element={<CardPage onUpdate={handleCardUpdate} />} />
+       <Route path='/habit/src/pages/test.jsx' element={<TestPage />}/>
      </Routes>
    </Router>
   )
