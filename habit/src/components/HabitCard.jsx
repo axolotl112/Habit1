@@ -24,12 +24,18 @@ export default function HabitCard(props) {
     navigate(`/habit/src/pages/CardPage.jsx/${props.card.name}` , { state: SProps }); // Target page route
   };
 
+  const TaskPageNavigate = () => {
+   
+    navigate("/habit/src/pages/TaskPage.jsx"); // Target page route
+  };
+
+
   const adjustedProgress = props.card.progress > 100 ? 100 : props.card.progress;
 
   return (
     <section className="sec--card">
       <div className="card-tab"></div>
-      <div onClick={handleClick} className="card-content">
+      <div className="card-content">
         <h2 className="card-title">{props.card.title}</h2>
         <p className="card-description">{props.card.name}</p>
 
@@ -48,8 +54,8 @@ export default function HabitCard(props) {
         <p className="progress-text">%{adjustedProgress}</p>
       </div>
       <div className="card-footer">
-        <div onClick={() => console.log(props)} className="footer-text">Text</div>
-        <div className="footer-text">Text</div>
+        <div onClick={handleClick} className="footer-text">Edit</div>
+        <div onClick={TaskPageNavigate} className="footer-text">add tasks</div>
       </div>
     </section>
   );

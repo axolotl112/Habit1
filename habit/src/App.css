@@ -118,3 +118,86 @@ header {
   border-radius: 4px;
   font-size: 14px;
 }
+
+
+
+ /* General styles for the page */
+.task-page {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.task-page-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Input and button container */
+.task-input-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.task-input {
+  flex: 1;
+  padding: 8px;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.task-add-button {
+  padding: 8px 16px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.task-add-button:hover {
+  background-color: #0056b3;
+}
+
+/* Task list */
+.task-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.task-item.completed .task-text {
+  text-decoration: line-through;
+  color: #888;
+}
+
+.task-checkbox {
+  margin-right: 10px;
+}
+
+.task-text {
+  flex: 1;
+}
+
+.task-delete-button {
+  padding: 5px 10px;
+  background-color: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.task-delete-button:hover {
+  background-color: darkred;
+}

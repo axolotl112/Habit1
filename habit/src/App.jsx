@@ -7,6 +7,7 @@ import HabitCard from './components/HabitCard'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import CardPage from './pages/CardPage'
 import TestPage from './pages/test'
+import TaskPage from './pages/TasksPage'
 
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
        {/* Target Page */}
        <Route path="/habit/src/pages/CardPage.jsx/:id" element={<CardPage onUpdate={handleCardUpdate} />} />
        <Route path='/habit/src/pages/test.jsx' element={<TestPage />}/>
+       <Route path='/habit/src/pages/TaskPage.jsx' element={<TaskPage />}/>
      </Routes>
    </Router>
   )
