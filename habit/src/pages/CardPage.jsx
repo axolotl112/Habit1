@@ -6,6 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 export default function CardPage({ onUpdate }) {
   const location = useLocation();
   const navigate = useNavigate();
+  const d = new Date();
 
   // Retrieve state passed via navigate
   const { id, title, name, progress, startDate: initialStartDate, endDate: initialEndDate } = location.state;
