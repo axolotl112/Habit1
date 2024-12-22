@@ -9,7 +9,7 @@ export default function HabitCard({ card, onUpdate, onDelete }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/habit/src/pages/CardPage.jsx/${card.name}`, { state: card });
+    navigate(`/habit/src/pages/CardPage.jsx/${card.id}`, { state: card });
   };
 
   const TaskPageNavigate = () => {

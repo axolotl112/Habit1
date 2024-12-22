@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react';
+
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -15,15 +16,25 @@ function App() {
 
   
   
-     const [cards, setCards] = useState([
-          { id: 1, title:"test" ,  name: 'Habit 1', progress: 100, startDate: new Date(),
-            endDate: new Date(), },
-          { id: 2, title:"test2" , name: 'Habit 2', progress: 40 ,     startDate: new Date(),
-            endDate: new Date(), },
-           {id: 3, title:"test3" , name: 'Habit 3', progress: 10 ,     startDate: new Date(),
-            endDate: new Date(),} 
-           
-        ]);
+  const [cards, setCards] = useState(() => {
+    const savedCards = localStorage.getItem('cards');
+    return savedCards
+      ? JSON.parse(savedCards).map((card) => ({
+          ...card,
+          startDate: new Date(card.startDate),
+          endDate: new Date(card.endDate),
+        }))
+      : [];
+  });
+
+  useEffect(() => {
+    // Convert `Date` objects to strings before saving
+    localStorage.setItem('cards', JSON.stringify(cards.map((card) => ({
+      ...card,
+      startDate: card.startDate.toISOString(),
+      endDate: card.endDate.toISOString(),
+    }))));
+  }, [cards]);
 
         const handleCardUpdate = (id, updatedData) => {
           setCards((prevCards) =>
