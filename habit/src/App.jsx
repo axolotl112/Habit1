@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
 import Header from './components/header'
 import HabitCard from './components/HabitCard'
@@ -28,7 +27,6 @@ function App() {
   });
 
   useEffect(() => {
-    // Convert `Date` objects to strings before saving
     localStorage.setItem('cards', JSON.stringify(cards.map((card) => ({
       ...card,
       startDate: card.startDate.toISOString(),
@@ -82,7 +80,7 @@ function App() {
        {/* Target Page */}
        <Route path="/habit/src/pages/CardPage.jsx/:id" element={<CardPage onUpdate={handleCardUpdate} />} />
        <Route path='/habit/src/pages/test.jsx' element={<TestPage />}/>
-       <Route path='/tasks/:id' element={<TaskPage />} />
+       <Route path='/tasks/:id' element={<TaskPage onProgress={handleCardUpdate} />} />
        <Route path='/habit/src/pages/CreatePage.jsx' element={<CreatePage onCreate={createCard} /> }/>
      </Routes>
    </Router>

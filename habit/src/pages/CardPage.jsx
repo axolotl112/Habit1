@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import LinearProgress from "@mui/material/LinearProgress";
 
 export default function CardPage({ onUpdate }) {
   const location = useLocation();
@@ -40,7 +41,6 @@ export default function CardPage({ onUpdate }) {
     setLocalProgress(Math.min(100, Math.max(0, parseInt(e.target.value, 10) || 0)));
 
   const handleSave = () => {
-    // Pass the updated data to the parent component or API
     onUpdate(id, {
       title: localTitle,
       name: localName,
@@ -49,7 +49,6 @@ export default function CardPage({ onUpdate }) {
       endDate: localEndDate,
     });
 
-    // Navigate back to the home page
     navigate("/");
   };
 

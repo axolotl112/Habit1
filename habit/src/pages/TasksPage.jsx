@@ -1,19 +1,32 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Alert from "@mui/material/Alert";
+import LinearProgress from "@mui/material/LinearProgress";
 
-export default function TaskPage() {
+export default function TaskPage({ onProgress }) {
   const { id } = useParams(); // Get the card ID from the URL
   const [tasks, setTasks] = useState(
     JSON.parse(localStorage.getItem(`tasks-${id}`)) || []
   );
   const [newTask, setNewTask] = useState("");
   const [error, setError] = useState("");
+  const [progress, setProgress] = useState(0); // Track the progress percentage
 
-  // Save tasks to localStorage whenever the tasks state changes
+  // Calculate progress when tasks change
   useEffect(() => {
+    const completedTasks = tasks.filter((task) => task.completed).length;
+    const totalTasks = tasks.length;
+    const progressPercentage = totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0;
+
+    // Update local state
+    setProgress(progressPercentage);
+
+    // Update the parent state once
+    onProgress(parseInt(id), { progress: progressPercentage });
+
+    // Save tasks to localStorage
     localStorage.setItem(`tasks-${id}`, JSON.stringify(tasks));
-  }, [tasks, id]);
+  }, [tasks, id]); 
 
   const addTask = (e) => {
     e.preventDefault();
@@ -42,6 +55,12 @@ export default function TaskPage() {
   return (
     <div className="task-page">
       <h1>Task Page for Card {id}</h1>
+
+      {/* Progress bar */}
+      <div className="progress-bar-container">
+        <LinearProgress variant="determinate" value={progress} />
+        <p>{progress.toFixed(0)}% Completed</p>
+      </div>
 
       <div className="task-input-container">
         <input
